@@ -1,0 +1,58 @@
+<mat-sidenav-container class="shell" [hasBackdrop]="isHandset()">
+    <mat-sidenav #drawer [mode]="isHandset() ? 'over' : 'side'" [opened]="sidenavOpened()" class="side">
+        <div class="brand">
+            <div class="logo">M</div>
+            <div class="meta">
+                <b>Maeon Admin</b>
+                <small>v1.0</small>
+            </div>
+        </div>
+
+
+        <mat-nav-list (click)="closeOnMobile(drawer)">
+            <a mat-list-item routerLink="/app/dashboard" routerLinkActive="active">
+                <mat-icon matListItemIcon>dashboard</mat-icon>
+                <span matListItemTitle>Dashboard</span>
+            </a>
+            <a mat-list-item routerLink="/app/reports" routerLinkActive="active">
+                <mat-icon matListItemIcon>bar_chart</mat-icon>
+                <span matListItemTitle>Reports</span>
+            </a>
+            <a mat-list-item routerLink="/app/settings" routerLinkActive="active">
+                <mat-icon matListItemIcon>settings</mat-icon>
+                <span matListItemTitle>Settings</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+        <mat-toolbar class="top" color="primary">
+            <button mat-icon-button class="only-mobile" (click)="toggleNav()" aria-label="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+
+            <div class="title">ระบบงาน</div>
+            <span class="spacer"></span>
+
+
+            <button mat-icon-button matTooltip="สลับโหมดสว่าง/มืด" (click)="toggleTheme()">
+                <mat-icon>brightness_6</mat-icon>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="account">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item
+                    routerLink="/app/settings"><mat-icon>settings</mat-icon><span>ตั้งค่า</span></button>
+                <button mat-menu-item routerLink="/login"><mat-icon>logout</mat-icon><span>ออกจากระบบ</span></button>
+            </mat-menu>
+        </mat-toolbar>
+
+
+        <main class="content">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
